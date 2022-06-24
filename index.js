@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose");
 const urlRoute = require("./routes/urlRouter")
+const {starter} = require("./controllers/urlController")
 
 const app = express();
 const uri = process.env.MONGO_URI;
@@ -22,9 +23,7 @@ connection.once("open", ()=>{
     console.log("MongoDB database connection extablished");
 })
 
-app.get('/', function(req, res) {
-  res.sendFile(process.cwd() + '/views/index.html');
-});
+app.get('/', starter);
 
 app.use("/api/shorturl", urlRoute)
 
